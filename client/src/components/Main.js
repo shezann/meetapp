@@ -1,4 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
+import styled from "styled-components";
+import Chat from "./Chat";
+import Call from "./Call";
+import Dashboard from "./Dashboard";
 import { io } from "socket.io-client";
 
 export default function Customers() {
@@ -17,9 +21,17 @@ export default function Customers() {
   };
 
   return (
-    <div>
-      <h1>socket.io</h1>
-      <button onClick={handleClick}>send message</button>
-    </div>
+    <MainContainer>
+      <Dashboard />
+      <Call />
+      <Chat />
+    </MainContainer>
   );
 }
+
+const MainContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  width: 100%;
+`;

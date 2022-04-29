@@ -1,14 +1,8 @@
-import "./App.css";
-import Customers from ".//components/Customers";
+import React from "react";
+import Main from "./components/Main";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <Customers />
-      </header>
-    </div>
-  );
+  return <Main />;
 }
 
 export default App;

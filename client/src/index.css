@@ -1,13 +1,40 @@
+@font-face {
+  font-family: "UntitledSans-Regular";
+  src: local("UntitledSans-Regular"),
+    url("./fonts/test-untitled-sans-regular.woff2") format("woff2");
+}
+@font-face {
+  font-family: "UntitledSans-Medium";
+  src: local("UntitledSans-Medium"),
+    url("./fonts/test-untitled-sans-medium.woff2") format("opentype");
+}
+@font-face {
+  font-family: "UntitledSans-Black";
+  src: local("UntitledSans-Black"),
+    url("./fonts/test-untitled-sans-black.woff2") format("opentype");
+}
+@font-face {
+  font-family: "UntitledSans-Bold";
+  src: local("UntitledSans-Bold"),
+    url("./fonts/test-untitled-sans-bold.woff2") format("opentype");
+}
+@font-face {
+  font-family: "UntitledSans-Light";
+  src: local("UntitledSans-Light"),
+    url("./fonts/test-untitled-sans-light.woff2") format("opentype");
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: "UntitledSans-Regular", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  min-height: 100%;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
