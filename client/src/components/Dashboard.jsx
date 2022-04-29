@@ -12,6 +12,8 @@ import { BiCopy } from "react-icons/bi";
 import useCopyToClipboard from "../hooks/useCopyToClipboard";
 
 export default function Dashboard({ id }) {
+  const [copyToClipboard, { success }] = useCopyToClipboard();
+
   return (
     <DashboardContainer>
       <StyledH1>Game with Randoms</StyledH1>
