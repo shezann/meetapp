@@ -1,8 +1,13 @@
 import React from "react";
-import Main from "./components/Main";
+import Main from "./components/Main.jsx";
+import { SocketProvider } from "./context/SocketProvider.js";
 
 function App() {
-  return <Main />;
+  return (
+    <SocketProvider >
+      <Main />
+    </SocketProvider>
+  );
 }
 
 export default App;

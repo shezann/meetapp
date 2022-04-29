@@ -1,4 +1,5 @@
 const socketIO = require("socket.io");
+const store = require("./store");
 
 let connectedPeers = [];
 
@@ -15,6 +16,7 @@ exports.connection = (io) => {
   io.on("connection", (socket) => {
     console.log("Connected Peers: ", connectedPeers);
     connectedPeers.push(socket.id);
+    store.setSocketId(socket.id);
 
     socket.on("disconnect", () => {
       console.log(`Client ${socket.id} disconnected`);

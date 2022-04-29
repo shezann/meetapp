@@ -7,10 +7,11 @@ import {
   CheckboxContainer,
   Label,
   IconButton,
-} from "./utils/CommonStyles";
+} from "../utils/CommonStyles";
 import { BiCopy } from "react-icons/bi";
+import useCopyToClipboard from "../hooks/useCopyToClipboard";
 
-export default function Dashboard() {
+export default function Dashboard({ id }) {
   return (
     <DashboardContainer>
       <StyledH1>Game with Randoms</StyledH1>
@@ -22,8 +23,8 @@ export default function Dashboard() {
       <IdContainer>
         <StyledText>Your streaming ID</StyledText>
         <CodeContainer>
-          <StyledCode>DD2EDDDE1</StyledCode>
-          <IconButton>
+          <StyledCode>{id}</StyledCode>
+          <IconButton onClick={() => copyToClipboard(id)}>
             <BiCopy />
           </IconButton>
         </CodeContainer>
@@ -100,7 +101,7 @@ const CodeContainer = styled.div`
 const StyledCode = styled.p`
   font-family: "UntitledSans-Medium", sans-serif;
   color: white;
-  font-size: 2em;
+  font-size: 1.3em;
   margin: 0;
 `;
 
