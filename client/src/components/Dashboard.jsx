@@ -10,9 +10,17 @@ import {
 } from "../utils/CommonStyles";
 import { BiCopy } from "react-icons/bi";
 import useCopyToClipboard from "../hooks/useCopyToClipboard";
+import { useToasts } from "@geist-ui/core";
 
 export default function Dashboard({ id }) {
   const [copyToClipboard, { success }] = useCopyToClipboard();
+  const { setToast } = useToasts();
+
+  // when button is clicked, copy the id to clipboard and show toast
+  const handleCopy = () => {
+    copyToClipboard(id);
+    setToast({ text: "Copied to clipboard", type: "success" });
+  };
 
   return (
     <DashboardContainer>
@@ -26,7 +34,7 @@ export default function Dashboard({ id }) {
         <StyledText>Your streaming ID</StyledText>
         <CodeContainer>
           <StyledCode>{id}</StyledCode>
-          <IconButton onClick={() => copyToClipboard(id)}>
+          <IconButton onClick={handleCopy}>
             <BiCopy />
           </IconButton>
         </CodeContainer>
