@@ -7,10 +7,16 @@ import Dashboard from "./Dashboard";
 
 export default function Customers() {
   const state = useSocket();
+  const socket = state.socket;
+
+  const sendPreOffer = (friendId, type) => {
+    console.log("emitting pre offer to server");
+    socket.emit("pre-offer", { friendId, type });
+  };
 
   return (
     <MainContainer>
-      <Dashboard id={state.socketId} />
+      <Dashboard id={state.socketId} sendPreOffer={sendPreOffer} />
       <Call />
       <Chat />
     </MainContainer>

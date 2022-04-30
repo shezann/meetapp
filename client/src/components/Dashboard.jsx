@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import {
   StyledH1,
@@ -12,7 +12,8 @@ import { BiCopy } from "react-icons/bi";
 import useCopyToClipboard from "../hooks/useCopyToClipboard";
 import { useToasts } from "@geist-ui/core";
 
-export default function Dashboard({ id }) {
+export default function Dashboard({ id, sendPreOffer }) {
+  const [friendId, setFriendId] = useState("");
   const [copyToClipboard, { success }] = useCopyToClipboard();
   const { setToast } = useToasts();
 
@@ -20,6 +21,26 @@ export default function Dashboard({ id }) {
   const handleCopy = () => {
     copyToClipboard(id);
     setToast({ text: "Copied to clipboard", type: "success" });
+  };
+
+  const handleInputChange = (e) => {
+    setFriendId(e.target.value);
+  };
+
+  const handlePCButtonChat = () => {
+    sendPreOffer(friendId, "CHAT_PC");
+  };
+
+  const handlePCButtonVideo = () => {
+    sendPreOffer(friendId, "VIDEO_PC");
+  };
+
+  const handleSButtonChat = () => {
+    sendPreOffer(friendId, "CHAT_S");
+  };
+
+  const handleSButtonVideo = () => {
+    sendPreOffer(friendId, "VIDEO_S");
   };
 
   return (
@@ -41,16 +62,16 @@ export default function Dashboard({ id }) {
       </IdContainer>
 
       <StyledText>Enter Friend ID</StyledText>
-      <FriendIdInput />
+      <FriendIdInput onChange={handleInputChange} />
       <ButtonsContainer>
-        <StyledButton>Chat</StyledButton>
-        <StyledButton>Video Call</StyledButton>
+        <StyledButton onClick={handlePCButtonChat}>Chat</StyledButton>
+        <StyledButton onClick={handlePCButtonVideo}>Video Call</StyledButton>
       </ButtonsContainer>
 
       <StyledText>Chat with a stranger</StyledText>
       <ButtonsContainer>
-        <StyledButton>Chat</StyledButton>
-        <StyledButton>Video Call</StyledButton>
+        <StyledButton onClick={handleSButtonChat}>Chat</StyledButton>
+        <StyledButton onClick={handleSButtonVideo}>Video Call</StyledButton>
       </ButtonsContainer>
 
       <CheckboxContainer>

@@ -7,8 +7,14 @@ export function useSocket() {
   return useContext(SocketContext);
 }
 
+const handlePreOffer = (data) => {
+  console.log("pre-offer came");
+  console.log(data);
+};
+
 export function SocketProvider({ children }) {
   const [state, setState] = useState({
+    socket: null,
     socketId: null,
     localStream: null,
     remoteStream: null,
@@ -16,15 +22,19 @@ export function SocketProvider({ children }) {
     allowStrangers: false,
     screenSharingActive: false,
   });
-  const [socket, setSocket] = useState();
 
   useEffect(() => {
     const newSocket = io("ws://localhost:8000");
-    setSocket(newSocket);
 
     newSocket.on("connect", () => {
       console.log("connected new client!");
-      setState({ ...state, socketId: newSocket.id });
+      setState({ ...state, socket: newSocket, socketId: newSocket.id });
+    });
+
+    // listen for new peer connections
+    newSocket.on("pre-offer", (data) => {
+      console.log("pre-offer received from server");
+      handlePreOffer(data);
     });
 
     return () => newSocket.close();
