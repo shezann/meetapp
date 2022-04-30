@@ -1,0 +1,13 @@
+export const callType = {
+  PC_CHAT: "PC_CHAT",
+  PC_VIDEO: "PC_VIDEO",
+  S_CHAT: "S_CHAT",
+  S_VIDEO: "S_VIDEO",
+};
+
+export const preOfferAnswer = {
+  CALLEE_NOT_FOUND: "CALLEE_NOT_FOUND",
+  CALL_ACCEPTED: "CALL_ACCEPTED",
+  CALL_REJECTED: "CALL_REJECTED",
+  CALL_UNAVAILABLE: "CALL_UNAVAILABLE",
+};

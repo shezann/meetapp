@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import * as constants from "../utils/constants";
 import styled from "styled-components";
 import {
   StyledH1,
@@ -28,19 +29,19 @@ export default function Dashboard({ id, sendPreOffer }) {
   };
 
   const handlePCButtonChat = () => {
-    sendPreOffer(friendId, "CHAT_PC");
+    sendPreOffer(friendId, constants.callType.PC_CHAT);
   };
 
   const handlePCButtonVideo = () => {
-    sendPreOffer(friendId, "VIDEO_PC");
+    sendPreOffer(friendId, constants.callType.PC_VIDEO);
   };
 
   const handleSButtonChat = () => {
-    sendPreOffer(friendId, "CHAT_S");
+    sendPreOffer(friendId, constants.callType.S_CHAT);
   };
 
   const handleSButtonVideo = () => {
-    sendPreOffer(friendId, "VIDEO_S");
+    sendPreOffer(friendId, constants.callType.S_VIDEO);
   };
 
   return (
