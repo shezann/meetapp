@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import * as constants from "../utils/constants";
 import { useSocket } from "../context/SocketProvider";
 import styled from "styled-components";
 import Chat from "./Chat";
@@ -22,17 +23,28 @@ export default function Customers() {
     socket.emit("pre-offer", { friendId, type });
   };
 
+  const sendPreOfferAnswer = (answer) => {
+    console.log("emitting pre offer answer to server");
+    socket.emit("pre-offer-answer", { callerId: state.socketId, answer });
+  };
+
   // show accept and decline buttons
   const handleAcceptCall = () => {
     console.log("call accepted");
+    sendPreOfferAnswer(constants.preOfferAnswer.CALL_ACCEPTED);
   };
   const handleRejectCall = () => {
     console.log("call rejected");
+    sendPreOfferAnswer(constants.preOfferAnswer.CALL_REJECTED);
   };
 
   return (
     <MainContainer>
-      <Dashboard id={state.socketId} sendPreOffer={sendPreOffer} />
+      <Dashboard
+        id={state.socketId}
+        sendPreOffer={sendPreOffer}
+        sendPreOfferAnswer={sendPreOfferAnswer}
+      />
       <Call />
       <Chat />
 
@@ -42,9 +54,7 @@ export default function Customers() {
           <RejectButton onClick={handleRejectCall}>Reject</RejectButton>
           <AcceptButton onClick={handleAcceptCall}>Accept</AcceptButton>
         </Modal.Subtitle>
-        <Modal.Content>
-          <p></p>
-        </Modal.Content>
+        <Modal.Content></Modal.Content>
       </Modal>
     </MainContainer>
   );

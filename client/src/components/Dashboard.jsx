@@ -11,12 +11,19 @@ import {
 } from "../utils/CommonStyles";
 import { BiCopy } from "react-icons/bi";
 import useCopyToClipboard from "../hooks/useCopyToClipboard";
-import { useToasts } from "@geist-ui/core";
+import { useToasts, Modal } from "@geist-ui/core";
 
-export default function Dashboard({ id, sendPreOffer }) {
+export default function Dashboard({ id, sendPreOffer, sendPreOfferAnswer }) {
   const [friendId, setFriendId] = useState("");
+  const [isCalling, setIsCalling] = useState(false);
+  const [callMessage, setCallMessage] = useState("");
   const [copyToClipboard, { success }] = useCopyToClipboard();
   const { setToast } = useToasts();
+
+  const closeHandler = () => {
+    setIsCalling(false);
+    setCallMessage("");
+  };
 
   // when button is clicked, copy the id to clipboard and show toast
   const handleCopy = () => {
@@ -30,18 +37,26 @@ export default function Dashboard({ id, sendPreOffer }) {
 
   const handlePCButtonChat = () => {
     sendPreOffer(friendId, constants.callType.PC_CHAT);
+    setCallMessage("Sending Chat Request to " + friendId);
+    setIsCalling(true);
   };
 
   const handlePCButtonVideo = () => {
     sendPreOffer(friendId, constants.callType.PC_VIDEO);
+    setCallMessage("Sending Video Request to " + friendId);
+    setIsCalling(true);
   };
 
   const handleSButtonChat = () => {
     sendPreOffer(friendId, constants.callType.S_CHAT);
+    setCallMessage("Sending Chat Request to a Stranger");
+    setIsCalling(true);
   };
 
   const handleSButtonVideo = () => {
     sendPreOffer(friendId, constants.callType.S_VIDEO);
+    setCallMessage("Sending Video Request to a Stranger");
+    setIsCalling(true);
   };
 
   return (
@@ -79,6 +94,12 @@ export default function Dashboard({ id, sendPreOffer }) {
         <Checkbox type="checkbox" id="allow_strangers" />
         <Label for="vehicle">Allow strangers to chat with you</Label>
       </CheckboxContainer>
+
+      <Modal visible={isCalling} onClose={closeHandler}>
+        <Modal.Title>Outgoing Call</Modal.Title>
+
+        <Modal.Content>{callMessage}</Modal.Content>
+      </Modal>
     </DashboardContainer>
   );
 }

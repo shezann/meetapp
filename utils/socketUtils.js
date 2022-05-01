@@ -33,6 +33,22 @@ exports.connection = (io) => {
       }
     });
 
+    socket.on("pre-offer-answer", (data) => {
+    console.log("pre-offer-answer came");
+      console.log("data: ", data);
+
+      const { friendId, type } = data;
+      const connectedPeer = connectedPeers.find((id) => id === friendId);
+      // send offer to friend if he is connected
+      if (connectedPeer) {
+        const data = {
+          callerId: socket.id,
+          type,
+        };
+        io.to(connectedPeer).emit("pre-offer-answer", data);
+      }
+    });
+
     socket.on("disconnect", () => {
       console.log(`Client ${socket.id} disconnected`);
       connectedPeers = connectedPeers.filter((id) => id !== socket.id);
